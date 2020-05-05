@@ -7,28 +7,33 @@ class Sketch : NSObject {
     //       Therefore, the line immediately below must always be present.
     let canvas : Canvas
     
-    // Position of circle
-    var x : Int
+    let generator = PerlinGenerator()
     
+    var increment: Double
+        
     // This function runs once
     override init() {
         
         // Create canvas object – specify size
         canvas = Canvas(width: 500, height: 500)
         
-        // Set starting position
-        x = 250
-        
+        // How much of a jump through Perlin noise space to make with each frame
+        increment = 0.001
+                
     }
     
     // This function runs repeatedly, forever, to create the animated effect
     func draw() {
+
+        // Generate noise, a random value between 0 and 1, where each successive value is close to the prior value
+        let naturalNoise = generator.perlinNoise(x: Double(canvas.frameCount) * increment)
+        print(naturalNoise)
         
-        // Change position
-        x += 1
+        // Map to a height relative to the screen
+        let height = map(value: naturalNoise, fromLower: 0, fromUpper: 1, toLower: 0, toUpper: Double(canvas.height))
         
-        // Draw an ellipse in the middle of the canvas
-        canvas.drawEllipse(at: Point(x: x, y: 250), width: 50, height: 50)
+        // Draw a vertical line of this height
+        canvas.drawLine(from: Point(x: canvas.frameCount, y: 0), to: Point(x: Double(canvas.frameCount), y: height))
         
     }
     
