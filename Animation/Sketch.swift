@@ -6,34 +6,26 @@ class Sketch : NSObject {
     // NOTE: Every sketch must contain an object of type Canvas named 'canvas'
     //       Therefore, the line immediately below must always be present.
     let canvas : Canvas
+  
+    var middle: point
+    let speed: Int
+    let radius: Int
     
-    // Create two "Perlin waves"
-    var waves: [PerlinWave] = []
-    
-    // This function runs once
+  // The function
     override init() {
         
-        // Create canvas object – specify size
-        canvas = Canvas(width: 500, height: 500)
+         // create the canvas
+        canvas = Canvas (width: 300, height: 400)
         
-        // Set up a Perlin wave
-        waves.append(PerlinWave(canvasToDrawUpon: canvas,
-                                increment: 0.001,
-                                color: Color(hue: 240, saturation: 80, brightness: 90, alpha: 100),
-                                verticalSpacePosition: 1))
+        canvas.drawShapesWithFill = false
         
-        waves.append(PerlinWave(canvasToDrawUpon: canvas,
-                                increment: 0.001,
-                                color: Color(hue: 60, saturation: 80, brightness: 90, alpha: 100),
-                                verticalSpacePosition: 2))
-        
-        waves.append(PerlinWave(canvasToDrawUpon: canvas,
-                                increment: 0.001,
-                                color: Color(hue: 180, saturation: 80, brightness: 90, alpha: 100),
-                                verticalSpacePosition: 3))
-        
+       middle = point (x: 150, y: 200)
+        speed = (y: -4...4)
+       radius = 25
         
     }
+   
+    
     
     // This function runs repeatedly, forever, to create the animated effect
     func draw() {
