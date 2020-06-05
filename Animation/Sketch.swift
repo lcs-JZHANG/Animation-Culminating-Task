@@ -7,7 +7,7 @@ class Sketch : NSObject {
     //       Therefore, the line immediately below must always be present.
     let canvas : Canvas
   
-    var middle: point
+    var middle: Point
     let speed: Int
     let radius: Int
     
@@ -19,8 +19,8 @@ class Sketch : NSObject {
         
         canvas.drawShapesWithFill = false
         
-       middle = point (x: 150, y: 200)
-        speed = (y: -4...4)
+       middle = Point (x: 150, y: 200)
+        speed = 4
        radius = 25
         
     }
@@ -30,24 +30,7 @@ class Sketch : NSObject {
     // This function runs repeatedly, forever, to create the animated effect
     func draw() {
         
-        // Draw this wave
-        for wave in waves {
-            wave.update()
-        }
-        
-        let height = Double.random(in:0...Double(canvas.height))
-        print (height)
-        
-        
-        //        //print the current frame
-        //       print(canvas.frameCount)
-        
-        
-        //       //draw a line
-        //       let from = Point(x: canvas.frameCount, y:0)
-        //     let to = Point(x: Double(canvas.frameCount), y: height)
-        //     canvas.drawLine(from: from, to: to)
-        
+       
     }
     
 }
